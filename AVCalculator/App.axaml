@@ -1,0 +1,16 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AVCalculator.App">
+    
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+    </Application.Styles>
+    
+    <!-- You can put resources in the Resources dictionary which is available on every style and control.-->
+    <Application.Resources>
+        <SolidColorBrush x:Key="KeyForegroundColor1" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="KeyBackgroundColor1" Color="#262626"/>
+        <SolidColorBrush x:Key="KeyForegroundColor1" Color="#343434"/>
+        <SolidColorBrush x:Key="AppBackgroundColor1" Color="#323232"/>
+    </Application.Resources>
+</Application>

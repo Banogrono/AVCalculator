@@ -1,0 +1,215 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        Width="400"
+        Height="450"
+        x:Class="AVCalculator.MainWindow"
+        Title="AVCalculator"
+        xmlns:ctrl ="clr-namespace:AVCalculator.Controller" 
+        Background="{DynamicResource AppBackgroundColor1}">  <!-- Background color is binded to defined to resource defined in app.xaml -->
+        
+        <Design.DataContext> 
+                <ctrl:MainWindowController />  <!-- namespace binding to ctrl variable made above -->
+        </Design.DataContext>
+        
+        <Grid>
+                <!-- Row definitions in the grid: 5 rows | 5px | Auto | 5px | * px| 5px |  -->
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="5" />    <!-- space between textbox and upper border  -->
+                        <RowDefinition Height="Auto" /> <!-- space for textbox-->
+                        <RowDefinition Height="5" />    <!-- space between textbox and keyboard  -->
+                        <RowDefinition Height="*" />    <!-- space for keyboard  -->
+                        <RowDefinition Height="5" />    <!-- space between keyboard and lower border  -->
+                </Grid.RowDefinitions>
+                
+                <!-- column definitions in the grid: 3 columns | 5px | * px | 5px|  -->
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5" /> <!-- space between textbox and left border  -->
+                        <ColumnDefinition Width="*" /> <!-- space for textbox in the middle  -->
+                        <ColumnDefinition Width="5" /> <!-- space between textbox and right border  -->
+                </Grid.ColumnDefinitions>
+                
+                <!-- textbox assembly-->
+                <DockPanel Grid.Row="1" Grid.Column="1">
+                        <TextBox x:Name="CalcWindow"  AcceptsTab="False" AcceptsReturn="False" Height="150" ></TextBox>
+                </DockPanel>
+                
+                <!-- Keyboard assembly-->
+                <Grid Grid.Row="3" Grid.Column="1">
+                        
+                        <!-- Row definitions for keyboard -->
+                        <Grid.RowDefinitions>
+                              <RowDefinition Height="*"/>
+                              <RowDefinition Height="5"/>
+                              <RowDefinition Height="*"/>
+                              <RowDefinition Height="5"/>
+                              <RowDefinition Height="*"/>
+                              <RowDefinition Height="5"/>
+                              <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Column definitions for keyboard -->
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" /> 
+                                <ColumnDefinition Width="5" /> 
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5" /> 
+                                <ColumnDefinition Width="*" /> 
+                                <ColumnDefinition Width="5" /> 
+                                <ColumnDefinition Width="*" /> 
+                                <ColumnDefinition Width="5" /> 
+                                <ColumnDefinition Width="*" /> 
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--==================== BUTTON DEFINITIONS =========================-->
+                        
+                        <Button Grid.Column="0" Grid.Row="0" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="{DynamicResource KeyBackgroundColor1}" 
+                                Foreground="{DynamicResource KeyForegroundColor1}">7</Button>
+                        
+                        <Button Grid.Column="2" Grid.Row="0" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">8</Button>
+                        
+                        <Button Grid.Column="4" Grid.Row="0"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">9</Button>
+                        
+                        <Button Grid.Column="6" Grid.Row="0"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">C</Button>
+                        
+                        <Button Grid.Column="8" Grid.Row="0"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">CE</Button>
+                
+                        <Button Grid.Column="0" Grid.Row="2"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">4</Button>
+                        
+                        <Button Grid.Column="2" Grid.Row="2"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">5</Button>
+                        
+                        <Button Grid.Column="4" Grid.Row="2"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">6</Button>
+                        
+                        <Button Grid.Column="6" Grid.Row="2"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">X</Button>
+                        
+                        <Button Grid.Column="8" Grid.Row="2"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">/</Button>
+                        
+                
+                        <Button Grid.Column="0" Grid.Row="4"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">1</Button>
+                        
+                        <Button Grid.Column="2" Grid.Row="4"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">2</Button>
+                        
+                        <Button Grid.Column="4" Grid.Row="4"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">3</Button>
+                        
+                        <Button Grid.Column="6" Grid.Row="4"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">+</Button>
+                        
+                        <Button Grid.Column="8" Grid.Row="4"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">-</Button>
+                        
+                        
+                        <Button Grid.Column="0" Grid.Row="6"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">0</Button>
+                        
+                        <Button Grid.Column="2" Grid.Row="6"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">.</Button>
+                        
+                        <Button Grid.Column="4" Grid.Row="6"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">=</Button>
+                        
+                        <Button Grid.Column="6" Grid.Row="6"   
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">M+</Button>
+                        
+                        <Button Grid.Column="8" Grid.Row="6"  
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                HorizontalContentAlignment="Center"  
+                                VerticalContentAlignment="Center" 
+                                Background="#151515" Foreground="#FFFFFF">x^2</Button>
+                </Grid>
+                
+        </Grid>
+        
+
+</Window>
