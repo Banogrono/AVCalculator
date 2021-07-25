@@ -13,7 +13,7 @@ it'll (hopefully) come in the later update.
 ## Screenshots
 
 <p align="center">
-    <img align="center" src="AVCalc.png"></img>
+    <img align="center" src="AVCalc1.png"></img>
 </p>
   
 ## Features
