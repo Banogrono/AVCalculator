@@ -131,6 +131,7 @@ namespace AVCalculator.Controller
 
         public void ButtonMultiply_Click()
         {
+            SetZeroIfEmpty();
             CalculatorCore.SetNumber(double.Parse(CalcWindowText));
             CalculatorCore.SetOperation(Operation.Multiply);
             CalcWindowText = "0";
@@ -138,6 +139,7 @@ namespace AVCalculator.Controller
 
         public void ButtonDivide_Click()
         {
+            SetZeroIfEmpty();
             CalculatorCore.SetNumber(double.Parse(CalcWindowText));
             CalculatorCore.SetOperation(Operation.Divide);
             CalcWindowText = "0";
@@ -148,15 +150,19 @@ namespace AVCalculator.Controller
             CalcWindowText += ".";
         }
 
+        // TODO: make that dividing by 0 displays information about illegal operation
         public void ButtonEquals_Click()
         {
-            CalculatorCore.SetNumber(double.Parse(CalcWindowText)); // setting second number
+            SetZeroIfEmpty();
+            var value = CalcWindowText == "" ? 0 : double.Parse(CalcWindowText);
+            CalculatorCore.SetNumber(value); // setting second number
             var result = CalculatorCore.Calculate();
             CalcWindowText = result;
         }
 
         public void ButtonMemPlus_Click()
         {
+            SetZeroIfEmpty();
             CalculatorCore.SetMemory(double.Parse(CalcWindowText));
         }
 
@@ -165,11 +171,18 @@ namespace AVCalculator.Controller
             CalcWindowText = CalculatorCore.GetMemory().ToString(CultureInfo.CurrentCulture);
         }
 
+        /*Primary use for backspace*/
         public void RemoveLastDigit()
         {
             if (CalcWindowText.Length > 1)
                 CalcWindowText = CalcWindowText.Remove(CalcWindowText.Length - 1);
             else if (CalcWindowText.Length == 1) CalcWindowText = "0";
+        }
+
+        // TODO: Why aren't you working
+        private void SetZeroIfEmpty()
+        {
+            if (CalcWindowText == "" || CalcWindowText.Equals(null)) CalcWindowText = "0";
         }
     }
 }
