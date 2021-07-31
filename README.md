@@ -21,6 +21,6 @@ it'll (hopefully) come in the later update.
 - Cross platform
 - Kinda works
 - Looks decent 
-- ...
+- Supports Keyboard (including numpad!)
 
   
