@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using Avalonia.Input;
 using AVCalculator.Model;
 using ReactiveUI;
@@ -107,7 +108,6 @@ namespace AVCalculator.Controller
             CalcWindowText = "0";
         }
 
-        // TODO: add negative numbers support
         public void ButtonPlus_Click()
         {
             CalculatorCore.SetNumber(double.Parse(CalcWindowText));
@@ -117,9 +117,16 @@ namespace AVCalculator.Controller
 
         public void ButtonMinus_Click()
         {
-            CalculatorCore.SetNumber(double.Parse(CalcWindowText));
-            CalculatorCore.SetOperation(Operation.Subtract);
-            CalcWindowText = "0";
+            if (CalcWindowText.Equals("0") || CalcWindowText.Equals(""))
+            {
+                CalcWindowText = "-";
+            }
+            else
+            {
+                CalculatorCore.SetNumber(double.Parse(CalcWindowText));
+                CalculatorCore.SetOperation(Operation.Subtract);
+                CalcWindowText = "0";
+            }
         }
 
         public void ButtonMultiply_Click()
@@ -136,10 +143,9 @@ namespace AVCalculator.Controller
             CalcWindowText = "0";
         }
 
-        // TODO: add support for decimals
         public void ButtonDot_Click()
         {
-            CalcWindowText = ".";
+            CalcWindowText += ".";
         }
 
         public void ButtonEquals_Click()
@@ -149,15 +155,21 @@ namespace AVCalculator.Controller
             CalcWindowText = result;
         }
 
-        // TODO: Add Memory support
         public void ButtonMemPlus_Click()
         {
-            CalcWindowText += "9";
+            CalculatorCore.SetMemory(double.Parse(CalcWindowText));
         }
 
         public void ButtonMemRec_Click()
         {
-            CalcWindowText += "9";
+            CalcWindowText = CalculatorCore.GetMemory().ToString(CultureInfo.CurrentCulture);
+        }
+
+        public void RemoveLastDigit()
+        {
+            if (CalcWindowText.Length > 1)
+                CalcWindowText = CalcWindowText.Remove(CalcWindowText.Length - 1);
+            else if (CalcWindowText.Length == 1) CalcWindowText = "0";
         }
     }
 }

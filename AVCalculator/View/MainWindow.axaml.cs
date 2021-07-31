@@ -111,6 +111,11 @@ namespace AVCalculator.View
                     MwController.ButtonEquals_Click();
                     break;
                 }
+                case Key.Back:
+                {
+                    MwController.RemoveLastDigit();
+                    break;
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ namespace AVCalculator.Model
 
         public static string Calculate()
         {
-            string result = "0";
+            string result;
             double tempMemory = 0;
             try
             {
@@ -37,7 +37,7 @@ namespace AVCalculator.Model
                     case Operation.Divide:
                         if (_firstNumberComponent == 0 || _secondNumberComponent == 0)
                         {
-                            result = "NaN";
+                            tempMemory = 0;
                             break;
                         }
                         else
@@ -83,27 +83,19 @@ namespace AVCalculator.Model
             _isFirstComponentEntered = true;
         }
 
-        public static void SetFirstComponent(double value)
-        {
-            _firstNumberComponent = value;
-        }
-
-        public static double GetFirstComponent()
-        {
-            return _firstNumberComponent;
-        }
-
-        public static void SetSecondComponent(double value)
-        {
-            _secondNumberComponent = value;
-        }
-
         public static void SetNumber(double value)
         {
             if (_isFirstComponentEntered)
+            {
                 _secondNumberComponent = value;
+            }
             else
-                _firstNumberComponent = value;
+            {
+                if (_firstNumberComponent != 0)
+                    _firstNumberComponent += value;
+                else
+                    _firstNumberComponent = value;
+            }
         }
 
         public static void SetMemory(double value)
