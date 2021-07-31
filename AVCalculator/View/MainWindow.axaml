@@ -1,20 +1,38 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-        Width="400"
-        Height="450"
-        MinHeight="360"
-        MinWidth="230"
-        x:Class="AVCalculator.MainWindow"
-        Title="AVCalculator"
-        xmlns:ctrl="clr-namespace:AVCalculator.Controller"
-        Background="{DynamicResource AppBackgroundColor1}">  <!-- Background color is bonded to defined to resource defined in app.xaml -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             Width="400"
+             Height="450"
+             MinHeight="360"
+             MinWidth="230"
+             x:Class="AVCalculator.View.MainWindow"
+             xmlns:ctrl="clr-namespace:AVCalculator.Controller"
+             KeyUp="InputElement_OnKeyUp"
+             Background="{DynamicResource AppBackgroundColor1}">  <!-- Background color is bonded to defined to resource defined in app.xaml -->
+
+    <!-- 
+    TRAVELER!
+    
+    KEYBOARD HANDLING - IF YOU ARE ME FORM THE FUTURE OR OTHER LOST SOUL THAT CAN NOT FIGURE OUT 
+    WHY THE FUCKING KEY EVENT DOES NOT WORK OR HOW IT CAN BE IMPLEMENTED - LOOK NO FURTHER,
+    I SHALL PRESENT YOU WITH ANSWER: 
+   
+    >>>>  PUT 'KeyUp'/ 'KeyDown' INSIDE 'UserControl' <<<< 
+    
+    Took me a week and a half to find that out. 
+    
+    Cheers
+    -->
 
     <Design.DataContext>
         <ctrl:MainWindowController />  <!-- namespace binding to ctrl variable made above -->
     </Design.DataContext>
+
+    <UserControl.Resources>
+
+    </UserControl.Resources>
 
     <Grid>
         <!-- Row definitions in the grid: 5 rows | 5px | Auto | 5px | * px| 5px |  -->
@@ -35,12 +53,12 @@
             <ColumnDefinition Width="5" /> <!-- space between text box and right border  -->
         </Grid.ColumnDefinitions>
 
-        <!-- text box assembly-->
+        <!-- label assembly-->
         <DockPanel Grid.Row="1" Grid.Column="1">
-            <TextBox x:Name="CalcWindow" AcceptsTab="False" AcceptsReturn="False" MinHeight="100"
-                     Background="{DynamicResource AppBackgroundColor1}"
-                     Foreground="{DynamicResource FontColor1}"
-                     Text="{Binding CalcWindowText}" />
+            <Label x:Name="CalcWindow" MinHeight="100"
+                   Background="{DynamicResource AppBackgroundColor1}"
+                   Foreground="{DynamicResource FontColor1}"
+                   Content="{Binding CalcWindowText}" />
         </DockPanel>
 
         <!-- Keyboard assembly-->
@@ -69,6 +87,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
 
             <!--==================== BUTTON DEFINITIONS =========================-->
 
@@ -244,7 +263,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Background="{DynamicResource KeyBackgroundColor2}"
+                    Background="{DynamicResource KeyBackgroundColor1}"
                     Foreground="{DynamicResource KeyForegroundColor1}"
                     Command="{Binding Button0_Click}">
                 0
@@ -303,6 +322,6 @@
                FontStyle="Italic"
                FontFamily="Centaury Gothic"
                Foreground="{DynamicResource FontColor1} " />
-
     </Grid>
-</Window>
+
+</UserControl>

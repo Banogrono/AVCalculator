@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Avalonia.Input;
 using AVCalculator.Model;
 using ReactiveUI;
 
@@ -6,8 +7,11 @@ namespace AVCalculator.Controller
 {
     public class MainWindowController : ReactiveObject
     {
+        // private bool _hasBeenSet = false;
+
+        public delegate void Handle(object source, KeyEventArgs e);
+
         private string _calcWindowText;
-        private bool _hasBeenSet = false;
 
         public MainWindowController()
         {
@@ -33,6 +37,7 @@ namespace AVCalculator.Controller
                 }
             }
         }
+
 
         // Button commands
 
@@ -134,7 +139,7 @@ namespace AVCalculator.Controller
         // TODO: add support for decimals
         public void ButtonDot_Click()
         {
-            CalcWindowText = CalculatorCore.GetFirstComponent() + ".";
+            CalcWindowText = ".";
         }
 
         public void ButtonEquals_Click()

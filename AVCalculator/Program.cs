@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
 using AVCalculator.Controller;
+using AVCalculator.View;
 
 namespace AVCalculator
 {
@@ -28,9 +29,12 @@ namespace AVCalculator
         // container, etc.
         private static void AppMain(Application app, string[] args)
         {
+            var mainWindowController = new MainWindowController();
+
             var window = new MainWindow
             {
-                DataContext = new MainWindowController()
+                MwController = mainWindowController,
+                DataContext = mainWindowController
             };
 
             app.Run(window);
