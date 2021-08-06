@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using Avalonia.Input;
 using AVCalculator.Model;
 using ReactiveUI;
 
@@ -8,11 +7,13 @@ namespace AVCalculator.Controller
 {
     public class MainWindowController : ReactiveObject
     {
-        // private bool _hasBeenSet = false;
-
-        public delegate void Handle(object source, KeyEventArgs e);
-
         private string _calcWindowText;
+
+        private bool _isOperationIllegal;
+
+        // if operation is already set, then set this to true and in case of clicking any of operations buttons (add,
+        // divide, multiply etc) just replace the operation instead of crashing (as prior to that change). 
+        private bool _isOperationSet;
 
         public MainWindowController()
         {
@@ -29,12 +30,27 @@ namespace AVCalculator.Controller
                     value); // setting up event so UI can refresh accordingly 
                 const string pattern = "([0-9]*[.]?[0-9]*)";
                 var result = Regex.IsMatch(value, pattern);
+
                 if (result)
                 {
-                    if (_calcWindowText.Equals("0") && !value.Equals("."))
+                    var illegalCharactersCounter = Regex.Matches(_calcWindowText, @"[a-zA-Z]").Count;
+                    if (_calcWindowText.Equals("0") && !value.Equals(".") || illegalCharactersCounter > 0)
+                    {
+                        if (illegalCharactersCounter > 0)
+                        {
+                            _isOperationIllegal = true;
+                            CalculatorCore.SetOperation(Operation.Clear);
+                            CalculatorCore.Calculate();
+                            _calcWindowText = "";
+                        }
+
                         _calcWindowText = "";
+                    }
                     else
+                    {
                         _calcWindowText = value;
+                        _isOperationIllegal = false;
+                    }
                 }
             }
         }
@@ -99,6 +115,7 @@ namespace AVCalculator.Controller
             CalculatorCore.SetOperation(Operation.Clear);
             CalculatorCore.Calculate();
             CalcWindowText = "0";
+            _isOperationSet = false;
         }
 
         public void ButtonCE_Click()
@@ -110,39 +127,87 @@ namespace AVCalculator.Controller
 
         public void ButtonPlus_Click()
         {
-            CalculatorCore.SetNumber(double.Parse(CalcWindowText));
-            CalculatorCore.SetOperation(Operation.Add);
-            CalcWindowText = "0";
+            if (_isOperationSet)
+            {
+                CalculatorCore.SetOperation(Operation.Add);
+            }
+            else
+            {
+                if (_isOperationIllegal) return;
+
+                CalculatorCore.SetNumber(double.Parse(CalcWindowText));
+                CalculatorCore.SetOperation(Operation.Add);
+                _isOperationSet = true;
+                CalcWindowText = "0";
+            }
         }
 
         public void ButtonMinus_Click()
         {
-            if (CalcWindowText.Equals("0") || CalcWindowText.Equals(""))
+            if (_isOperationSet)
             {
-                CalcWindowText = "-";
+                CalculatorCore.SetOperation(Operation.Subtract);
             }
             else
             {
-                CalculatorCore.SetNumber(double.Parse(CalcWindowText));
-                CalculatorCore.SetOperation(Operation.Subtract);
-                CalcWindowText = "0";
+                if (CalcWindowText.Equals("0") || CalcWindowText.Equals("") ||
+                    CalcWindowText.Equals("illegal operation"))
+                {
+                    CalcWindowText = "-";
+                }
+                else
+                {
+                    if (_isOperationIllegal) return;
+
+                    CalculatorCore.SetNumber(double.Parse(CalcWindowText));
+
+
+                    CalculatorCore.SetOperation(Operation.Subtract);
+                    _isOperationSet = true;
+                    CalcWindowText = "0";
+                }
             }
         }
 
         public void ButtonMultiply_Click()
         {
-            SetZeroIfEmpty();
-            CalculatorCore.SetNumber(double.Parse(CalcWindowText));
-            CalculatorCore.SetOperation(Operation.Multiply);
-            CalcWindowText = "0";
+            if (_isOperationSet)
+            {
+                CalculatorCore.SetOperation(Operation.Multiply);
+            }
+            else
+            {
+                SetZeroIfEmpty();
+                if (_isOperationIllegal) return;
+
+
+                CalculatorCore.SetNumber(double.Parse(CalcWindowText));
+
+
+                CalculatorCore.SetOperation(Operation.Multiply);
+                _isOperationSet = true;
+                CalcWindowText = "0";
+            }
         }
 
         public void ButtonDivide_Click()
         {
-            SetZeroIfEmpty();
-            CalculatorCore.SetNumber(double.Parse(CalcWindowText));
-            CalculatorCore.SetOperation(Operation.Divide);
-            CalcWindowText = "0";
+            if (_isOperationSet)
+            {
+                CalculatorCore.SetOperation(Operation.Divide);
+            }
+            else
+            {
+                SetZeroIfEmpty();
+                if (_isOperationIllegal) return;
+
+                CalculatorCore.SetNumber(double.Parse(CalcWindowText));
+
+
+                CalculatorCore.SetOperation(Operation.Divide);
+                _isOperationSet = true;
+                CalcWindowText = "0";
+            }
         }
 
         public void ButtonDot_Click()
@@ -150,20 +215,25 @@ namespace AVCalculator.Controller
             CalcWindowText += ".";
         }
 
-        // TODO: make that dividing by 0 displays information about illegal operation
         public void ButtonEquals_Click()
         {
+            if (_isOperationIllegal) return;
+
             SetZeroIfEmpty();
             var value = CalcWindowText == "" ? 0 : double.Parse(CalcWindowText);
             CalculatorCore.SetNumber(value); // setting second number
             var result = CalculatorCore.Calculate();
             CalcWindowText = result;
+            _isOperationSet = false;
         }
 
         public void ButtonMemPlus_Click()
         {
+            if (_isOperationIllegal) return;
+
             SetZeroIfEmpty();
-            CalculatorCore.SetMemory(double.Parse(CalcWindowText));
+            var value = CalcWindowText == "" ? 0 : double.Parse(CalcWindowText); // issue #3 
+            CalculatorCore.SetMemory(value);
         }
 
         public void ButtonMemRec_Click()
@@ -180,6 +250,7 @@ namespace AVCalculator.Controller
         }
 
         // TODO: Why aren't you working
+        // TODO: adapt for 'illegal operation'
         private void SetZeroIfEmpty()
         {
             if (CalcWindowText == "" || CalcWindowText.Equals(null)) CalcWindowText = "0";

@@ -22,6 +22,7 @@ namespace AVCalculator.Model
         {
             string result;
             double tempMemory = 0;
+            var isOperationIllegal = false;
             try
             {
                 switch (_selectedOperation)
@@ -37,6 +38,7 @@ namespace AVCalculator.Model
                     case Operation.Divide:
                         if (_firstNumberComponent == 0 || _secondNumberComponent == 0)
                         {
+                            isOperationIllegal = true;
                             tempMemory = 0;
                             break;
                         }
@@ -66,7 +68,10 @@ namespace AVCalculator.Model
                 }
 
                 _firstNumberComponent = tempMemory;
-                result = tempMemory.ToString(CultureInfo.CurrentCulture);
+                if (isOperationIllegal)
+                    result = "illegal operation"; // additional information for illegal operations also issue #3
+                else
+                    result = tempMemory.ToString(CultureInfo.CurrentCulture);
             }
             catch (Exception e)
             {
