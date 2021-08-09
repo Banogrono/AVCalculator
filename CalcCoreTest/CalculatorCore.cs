@@ -6,57 +6,66 @@ namespace CalcCoreTest
     public static class CalculatorCore
     {
         private static double _memory;
-        private static Queue<double> _outputQueue;
-        private static Stack<Operation> _operationsStack;
+        private static readonly List<double> Numbers;
 
-        private static double _number1;
-        private static double _number2;
-        private static double result;
+        private static double _result;
         private static Operation _operation;
-        public static string operationString = "";
 
+        static CalculatorCore()
+        {
+            Numbers = new List<double>();
+        }
 
         public static string Calculate()
         {
             ConductOperation(_operation);
-            return result.ToString(CultureInfo.InvariantCulture);
+            return _result.ToString(CultureInfo.InvariantCulture);
         }
 
         public static void SetNumber(double value)
         {
-            operationString += value;
-            _number1 = value;
+            Numbers.Add(value);
         }
 
         public static void SetOperation(Operation value)
         {
-            ConductOperation(value);
+            if (Numbers.Count > 1) ConductOperation(_operation);
             _operation = value;
         }
 
         private static void ConductOperation(Operation value)
         {
+            _operation = value;
             switch (value)
             {
                 case Operation.Add:
-                    operationString += "+";
-                    result += _number1;
+                    _result = Numbers[0] + Numbers[1];
                     break;
                 case Operation.Subtract:
-                    operationString += "-";
-                    result -= _number1;
+                    _result = Numbers[0] - Numbers[1];
                     break;
                 case Operation.Divide:
-                    operationString += "/";
-                    result /= _number1;
+                    _result = Numbers[0] / Numbers[1];
                     break;
                 case Operation.Multiply:
-                    operationString += "*";
-                    result *= _number1;
+                    _result = Numbers[0] * Numbers[1];
                     break;
             }
+
+            Numbers.Clear();
+            Numbers.Add(_result);
         }
 
+        public static void ClearEntity()
+        {
+            _result = 0;
+            Numbers.Clear();
+        }
+
+        public static void DeleteLast()
+        {
+            Numbers.Remove(1);
+        }
 
         public static void SetMemory(double value)
         {

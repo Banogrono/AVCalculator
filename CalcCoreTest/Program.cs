@@ -6,16 +6,16 @@ namespace CalcCoreTest
     {
         private static void Main(string[] args)
         {
-            CalculatorCore.SetNumber(3);
-            CalculatorCore.SetOperation(Operation.Add);
-            CalculatorCore.SetNumber(3);
-            CalculatorCore.SetOperation(Operation.Add);
-            CalculatorCore.SetNumber(3);
-            CalculatorCore.SetOperation(Operation.Multiply);
+            // A test field - works like a charm
             CalculatorCore.SetNumber(2);
+            CalculatorCore.SetOperation(Operation.Multiply);
+            CalculatorCore.SetNumber(3);
+            CalculatorCore.Calculate();
+            CalculatorCore.SetOperation(Operation.Add);
+            CalculatorCore.SetNumber(3);
+
 
             Console.WriteLine(CalculatorCore.Calculate());
-            Console.WriteLine(CalculatorCore.operationString);
         }
     }
 }
