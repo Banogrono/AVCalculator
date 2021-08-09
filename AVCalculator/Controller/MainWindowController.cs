@@ -229,7 +229,7 @@ namespace AVCalculator.Controller
 
         public void ButtonMemPlus_Click()
         {
-            if (_isOperationIllegal) return;
+            // if (_isOperationIllegal) return;
 
             SetZeroIfEmpty();
             var value = CalcWindowText == "" ? 0 : double.Parse(CalcWindowText); // issue #3 
@@ -253,7 +253,10 @@ namespace AVCalculator.Controller
         // TODO: adapt for 'illegal operation'
         private void SetZeroIfEmpty()
         {
-            if (CalcWindowText == "" || CalcWindowText.Equals(null)) CalcWindowText = "0";
+            if (CalcWindowText == ""
+                || CalcWindowText.Equals(null)
+                || CalcWindowText.ToLower().Contains("illegal operation"))
+                CalcWindowText = "0";
         }
     }
 }
