@@ -20,6 +20,7 @@ namespace AVCalculator.Model
 
         public static string Calculate()
         {
+            if (_operation == Operation.Divide && Numbers.Contains(0)) return "Illegal operation";
             ConductOperation(_operation);
             _operation = Operation.None;
             return _result.ToString(CultureInfo.InvariantCulture);
@@ -38,7 +39,7 @@ namespace AVCalculator.Model
 
         private static void ConductOperation(Operation value)
         {
-            if (value == Operation.None) return;
+            if (value == Operation.None || Numbers.Count < 2) return;
 
             _operation = value;
             switch (value)
