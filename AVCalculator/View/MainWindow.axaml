@@ -1,4 +1,4 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<Window xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,8 +10,10 @@
              x:Class="AVCalculator.View.MainWindow"
              xmlns:ctrl="clr-namespace:AVCalculator.Controller"
              KeyUp="InputElement_OnKeyUp"
+             Title="AVCalculator"
+             Icon="/Assets/AVCalculator.ico"
              Background="{DynamicResource AppBackgroundColor1}">  <!-- Background color is bonded to defined to resource defined in app.xaml -->
-
+    
     <!-- 
     TRAVELER!
     
@@ -19,7 +21,7 @@
     WHY THE FUCKING KEY EVENT DOES NOT WORK OR HOW IT CAN BE IMPLEMENTED - LOOK NO FURTHER,
     I SHALL PRESENT YOU WITH ANSWER: 
    
-    >>>>  PUT 'KeyUp'/ 'KeyDown' INSIDE 'UserControl' <<<< 
+    >>>>  PUT 'KeyUp'/ 'KeyDown' INSIDE 'UserControl'/ 'Window' <<<< 
     
     Took me a week and a half to find that out. 
     
@@ -29,11 +31,7 @@
     <Design.DataContext>
         <ctrl:MainWindowController />  <!-- namespace binding to ctrl variable made above -->
     </Design.DataContext>
-
-    <UserControl.Resources>
-
-    </UserControl.Resources>
-
+    
     <Grid>
         <!-- Row definitions in the grid: 5 rows | 5px | Auto | 5px | * px| 5px |  -->
         <Grid.RowDefinitions>
@@ -324,4 +322,4 @@
                Foreground="{DynamicResource FontColor1} " />
     </Grid>
 
-</UserControl>
+</Window>

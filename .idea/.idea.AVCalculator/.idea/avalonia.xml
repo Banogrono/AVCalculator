@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="AVCalculator/App.axaml" value="AVCalculator/AVCalculator.csproj" />
+        <entry key="AVCalculator/Project.axaml" value="AVCalculator/AVCalculator.csproj" />
         <entry key="AVCalculator/View/App.axaml" value="AVCalculator/AVCalculator.csproj" />
         <entry key="AVCalculator/View/MainWindow.axaml" value="AVCalculator/AVCalculator.csproj" />
       </map>

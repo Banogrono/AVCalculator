@@ -5,21 +5,28 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.3" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
+        <PackageReference Include="Avalonia" Version="0.10.3"/>
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.3"/>
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3"/>
         <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3"/>
-        <PackageReference Include="reactiveui-core" Version="7.0.0" />
+        <PackageReference Include="reactiveui-core" Version="7.0.0"/>
         <PackageReference Include="Splat" Version="10.0.1"/>
+        <AvaloniaResource Include="Assets\**"/>
     </ItemGroup>
     <ItemGroup>
-      <Compile Update="View\MainWindow.axaml.cs">
-        <DependentUpon>MainWindow.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="App.axaml.cs">
-        <DependentUpon>App.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="View\MainWindow.axaml.cs">
+            <DependentUpon>MainWindow.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="App.axaml.cs">
+            <DependentUpon>App.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="Assets\AVCalculator.ico"/>
+        <Resource Include="Assets\AVCalculator.ico">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
     </ItemGroup>
 </Project>

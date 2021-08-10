@@ -3,14 +3,16 @@
              x:Class="AVCalculator.App">
     <!-- You can put resources in the Resources dictionary which is available on every style and control.-->
     <!-- Achtung! Do not try to declare it other way than done below - app crashes :| -->
+    
     <Application.Resources>
         <SolidColorBrush x:Key="KeyForegroundColor1">#FFFFFF</SolidColorBrush>
         <SolidColorBrush x:Key="KeyBackgroundColor1">#151515</SolidColorBrush>
         <SolidColorBrush x:Key="KeyBackgroundColor2">#343434</SolidColorBrush>
         <SolidColorBrush x:Key="AppBackgroundColor1">#1f1f1f</SolidColorBrush>
         <SolidColorBrush x:Key="FontColor1">#FFFFFF</SolidColorBrush>
+        
     </Application.Resources>
-
+    
     <Application.Styles>
         <FluentTheme Mode="Light" />
     </Application.Styles>
