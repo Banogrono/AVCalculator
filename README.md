@@ -5,7 +5,7 @@ AVCalculator is a cross-patform desktop calculator made with Avalonia framework.
 The point of this project is to learn Avalonia, advanced C# techniques and use MVC
 pattern in practice. 
 
-**[Discalmer] This is version 0.2** - it is quite buggy, but i'm working on it.  
+**[Disclamer] This is version 0.8** - it new extra simple calculation core and is much less prone to error than last vesrion, but it's still WIP.  
 
 
 ## Screenshots
